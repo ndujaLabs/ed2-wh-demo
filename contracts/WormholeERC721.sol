@@ -184,4 +184,9 @@ contract WormholeERC721 is Ownable, NFTGetters, NFTSetters {
     function registerChain(uint16 chainId_, bytes32 bridgeContract_) internal onlyOwner {
         setBridgeImplementation(chainId_, bridgeContract_);
     }
+
+    function _wormholeGetContract(uint16 chainId) internal view returns (bytes32) {
+        return bridgeContracts(chainId);
+    }
+
 }

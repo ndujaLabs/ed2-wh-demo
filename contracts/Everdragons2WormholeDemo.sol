@@ -19,7 +19,7 @@ contract Everdragons2WormholeDemo is ERC721, ERC721Burnable, WormholeERC721 {
     }
 
     // OpenSea contractURI()
-    function contractURI() public view returns (string memory) {
+    function contractURI() public pure returns (string memory) {
         return _baseURI();
     }
 
@@ -36,11 +36,8 @@ contract Everdragons2WormholeDemo is ERC721, ERC721Burnable, WormholeERC721 {
         _safeMint(to, tokenId);
     }
 
-//    function wormholeGetContract(uint16 chainId) public {
-//        return _wormholeGetContract(chainId);
-//    }
-//
-//    function wormholeGetAllContracts() public {
-//        return _wormholeGetAllContracts();
-//    }
+    // Return the corresponding contract on a different chain
+    function wormholeGetContract(uint16 chainId) public view returns (bytes32) {
+        return _wormholeGetContract(chainId);
+    }
 }
