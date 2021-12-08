@@ -106,9 +106,15 @@ contract NFTSetters is NFTState {
 contract WormholeERC721 is Ownable, NFTGetters, NFTSetters {
     using BytesLib for bytes;
 
+    function wormholeSetup(uint16 chainId, address wormhole) public {
+        // setOwner(_msgSender());
+        setChainId(chainId);
+        setWormhole(wormhole);
+    }
+
     function _wormholeTransfer(uint256 tokenID, uint16 recipientChain, bytes32 recipient, uint32 nonce) internal returns (uint64 sequence) {
         //require(_isApprovedOrOwner(_msgSender(), tokenID), "ERC721: transfer caller is not owner nor approved");
-        //TODO require chainID
+        require(bridgeContracts(recipientChain) != 0, "ERC721: recipientChain not allowed");
         sequence = logTransfer(NFTStructs.Transfer({
             tokenID      : tokenID,
             to           : recipient,
