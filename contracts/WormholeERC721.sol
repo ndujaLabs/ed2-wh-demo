@@ -106,7 +106,7 @@ contract NFTSetters is NFTState {
 contract WormholeERC721 is Ownable, NFTGetters, NFTSetters {
     using BytesLib for bytes;
 
-    function wormholeSetup(uint16 chainId, address wormhole) public {
+    function wormholeSetup(uint16 chainId, address wormhole) public onlyOwner {
         // setOwner(_msgSender());
         setChainId(chainId);
         setWormhole(wormhole);
