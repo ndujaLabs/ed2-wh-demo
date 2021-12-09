@@ -11,7 +11,7 @@ contract Everdragons2WormholeDemo is ERC721, ERC721Burnable, WormholeERC721 {
     constructor() ERC721("Everdragons2Wormhole Demo", "ED2d") {}
 
     function _baseURI() internal pure override returns (string memory) {
-        return "https://everdragons2.com/metadata/ed2/";
+        return "https://www.everdragons2.com/metadata/ed2-test/";
     }
 
     function safeMint(address to, uint256 tokenId) public onlyOwner {

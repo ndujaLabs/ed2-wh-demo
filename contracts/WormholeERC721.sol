@@ -112,6 +112,10 @@ contract WormholeERC721 is Ownable, NFTGetters, NFTSetters {
         setWormhole(wormhole);
     }
 
+    function wormholeRegisterChain(uint16 chainId_, bytes32 bridgeContract_) public onlyOwner {
+        setBridgeImplementation(chainId_, bridgeContract_);
+    }
+
     function _wormholeTransfer(uint256 tokenID, uint16 recipientChain, bytes32 recipient, uint32 nonce) internal returns (uint64 sequence) {
         //require(_isApprovedOrOwner(_msgSender(), tokenID), "ERC721: transfer caller is not owner nor approved");
         require(bridgeContracts(recipientChain) != 0, "ERC721: recipientChain not allowed");
@@ -185,10 +189,6 @@ contract WormholeERC721 is Ownable, NFTGetters, NFTSetters {
         index += 2;
 
         require(encoded.length == index, "invalid Transfer");
-    }
-
-    function registerChain(uint16 chainId_, bytes32 bridgeContract_) internal onlyOwner {
-        setBridgeImplementation(chainId_, bridgeContract_);
     }
 
     function _wormholeGetContract(uint16 chainId) internal view returns (bytes32) {
